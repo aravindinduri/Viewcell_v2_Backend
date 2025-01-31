@@ -7,6 +7,7 @@ const app = express();
 app.use(
     cors({
         origin: [
+            "https://viewcell.onrender.com",
             "http://localhost:5173",
         ],
         credentials: true,
