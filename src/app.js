@@ -1,12 +1,18 @@
 import express from "express";
-import cors from "cors";
 import cookieParser from "cookie-parser";
 
 const app = express();
 
-app.use(cors())
+// Custom CORS Middleware (Added)
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://viewcell.onrender.com/");  // Allow only your frontend
+    res.header("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, auth headers)
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");  // Allow methods
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization"); // Allow specific headers
+    next();
+});
 
-
+// Your other middleware
 app.use(express.json({ limit: "200mb" }));
 app.use(express.urlencoded({ extended: true, limit: "200mb" }));
 app.use(express.static("public"));
