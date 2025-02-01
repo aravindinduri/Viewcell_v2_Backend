@@ -8,7 +8,6 @@ app.use(
     cors({
         origin: [
             "https://viewcell.onrender.com/",
-            "http://localhost:5173",
         ],
         credentials: true,
     })
@@ -30,7 +29,7 @@ import playlistRouter from "./routes/playlist.routes.js";
 import healthcheckRouter from "./routes/healthcheck.routes.js";
 import dashboardRouter from "./routes/dashboard.routes.js";
 
-app.get("/", (req, res) => res.send("Backend of Streamify"));
+app.get("/", (req, res) => res.send("Backend of Viewcell"));
 
 //routes declaration
 app.use("/api/v1/users", userRouter);
