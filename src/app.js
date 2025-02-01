@@ -4,15 +4,23 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
-app.use(cors())
+app.use(
+    cors({
+        origin: ["https://viewcell.onrender.com", "http://localhost:5173"], 
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+        credentials: true,
+    })
+);
 
+app.options("*", cors());
 
 app.use(express.json({ limit: "200mb" }));
 app.use(express.urlencoded({ extended: true, limit: "200mb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
-//routes
+// Routes
 import userRouter from "./routes/user.routes.js";
 import commentRouter from "./routes/comment.routes.js";
 import likeRouter from "./routes/like.routes.js";
