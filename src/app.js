@@ -3,12 +3,18 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
-// Custom CORS Middleware (Added)
+// Custom CORS Middleware for anonymous access (Allow any origin)
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://viewcell.onrender.com/");  // Allow only your frontend
-    res.header("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, auth headers)
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");  // Allow methods
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization"); // Allow specific headers
+    res.header("Access-Control-Allow-Origin", "*");  // Allow any origin
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");  // Allow specific methods
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");  // Allow specific headers
+    res.header("Access-Control-Allow-Credentials", "false");  // Do not allow credentials (cookies/auth)
+    
+    // Handle preflight (OPTIONS) request
+    if (req.method === "OPTIONS") {
+        return res.status(200).end();
+    }
+
     next();
 });
 
@@ -18,7 +24,7 @@ app.use(express.urlencoded({ extended: true, limit: "200mb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
-// Routes
+// Routes (same as before)
 import userRouter from "./routes/user.routes.js";
 import commentRouter from "./routes/comment.routes.js";
 import likeRouter from "./routes/like.routes.js";
