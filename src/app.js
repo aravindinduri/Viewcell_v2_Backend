@@ -4,17 +4,7 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
-app.use(
-    cors({
-        origin: [
-            "https://viewcell.onrender.com",
-            "http://localhost:5173",
-        ],
-        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-        allowedHeaders: ["Content-Type", "Authorization"],
-        credentials: true,
-    })
-)
+app.use(cors())
 
 
 app.use(express.json({ limit: "200mb" }));
