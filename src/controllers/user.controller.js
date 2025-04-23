@@ -48,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const { fullName, email, username, password } = req.body;
     const avatarLocalPath = req.files?.avatar[0]?.path;
     const coverImageLocalPath = req?.files?.coverImage?.[0]?.path;
-
+    
     if (
         [fullName, email, username, password].some(
             (field) => field?.trim() === ""
